@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    {% extends 'layout.html' %}
+    {% block ourpage %}
+    <p align = "right" id = "logged" style = "margin-right:50px">you are currently not logged in.</p>
+    <h1 align = "center">Login page</h1>
+    <p align = "center">first time? click <a href = "/signup.html">here</a> to sign up!</p>
+    <br>
+    <p align = "center">have an account? sign in below!</p>
+    <form align = "center">
+        <input type = "text" placeholder = "username" id = "username" autocomplete = "off">
+        <br><br>
+        <input type = "password" placeholder = "password" id = "password">
+        <br><br>
+        <button type = "button" onclick = "clearInput()">log in</button>
+    </form>
+    <br><br>
+    <div class = "buttons" style = "text-align: center">
+        <button style = "margin-right: 100px; width: 100px" onclick = "window.location.href='home'" id = "home">home</button>
+        <button style = "margin-right: 100px; width: 100px" onclick = "window.location.href='search'" id = "search">search</button>
+        <button style = "width: 100px;" onclick = "window.location.href='about'" id = "about">about</button>
+    </div>
+    <script>
+        function clearInput() {
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+            document.getElementById("logged").innerHTML = "you are currently logged in as waye."
+        }
+    </script>
+    {% endblock %}
+</body>
+</html>

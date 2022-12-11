@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {{ title }}
+    </title>
+</head>
+<body>
+    {% extends 'layout.html' %}
+    {% block ourpage %}
+    <p align = "right" id = "logged" style = "margin-right:50px">you are currently logged in as waye.</p>
+    <h1 align = "center">What is Spelp?</h1><br>
+    <div id = "text1" style = "margin-left: 100px; margin-right: 100px;">
+        <p align = "center">spelp was made BY music lovers, FOR music lovers.<br><br>it's like yelp... but for music!<br><br>(and it's a little simpler.)<br><br>basically, we here at spelp believe in simplicity.<br><br>and that's why spelp was created.<br><br>to provide you with a fast way to rate the songs you love...<br><br>and maybe also the ones you don't. (:</p>
+    </div>
+    <br><br><br>
+    <div class = "buttons" style = "text-align: center">
+        <button style = "margin-right: 100px; width: 100px" onclick = "window.location.href='home'" id = "home">home</button>
+        <button style = "margin-right: 100px; width: 100px" onclick = "window.location.href='search'" id = "search">search</button>
+        <button style = "width: 100px;" onclick = "window.location.href='login'" id = "login">login</button>
+    </div>
+
+    {% endblock %}
+
+</body>
+</html>

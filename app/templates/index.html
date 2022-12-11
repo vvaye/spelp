@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>
+        {{ title }}
+    </title>
+</head>
+<body>
+    {% extends 'layout.html' %}
+    {% block ourpage %}
+    <p align = "right" id = "logged" style = "margin-right:50px">you are currently not logged in.</p>
+    <h1 align = "center">Hey, we're Spelp!</h1>
+    <h4 align = "center">a fast way to rate and review :p</h4>
+    <br><p align = "center">search for a song to rate or review, log in to see your past reviews, or read about what Spelp is!</p>
+    <br>
+    <div class = "buttons" style = "text-align: center">
+        <button style = "margin-right: 100px; width: 100px" onclick = "window.location.href='search'" id = "search">search</button>
+        <button style = "margin-right: 100px; width: 100px" onclick = "window.location.href='login'" id = "login">log in</button>
+        <button style = "width: 100px;" onclick = "window.location.href='about'" id = "about">about</button>
+    </div>
+
+    {% endblock %}
+</body>
+</html>

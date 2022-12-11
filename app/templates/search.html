@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>table, th, td {border: 1px solid black; padding: 8px;}</style>
+</head>
+<body>
+    {% extends 'layout.html' %}
+    {% block ourpage %}
+    <p align = "right" id = "logged" style = "margin-right:50px">you are currently logged in as waye.</p>
+
+    <h1 align = "center">Search for a song!</h1>
+    <p align = "center">type in the song and artist names, then click 'rate'!</p>
+    <div align = "center">
+
+            <input type="text" style="width:350px; margin-right:50px" id="song" name="song" placeholder = "type the name of the song!">
+            <input type="text" style="width:350px; margin-right:50px" id="artist" name="artist" placeholder = "type the artist FULL name!">
+            <button id = "submitsong" type = "button" onclick = "showPast()">rate!</button>
+            <br>
+            <div id = "rating" style = "display:none">
+                <br>
+                <div>
+                    genre? <select name = "genre" id = "genre">
+                    <option value = "null" disabled selected></option>
+                    <option value = "pop">pop</option>
+                    <option value = "country">country</option>
+                    <option value = "folk">folk</option>
+                    <option value = "rap">rap</option>
+                    <option value = "kpop">kpop</option>
+                    <option value = "classical">classical</option>
+                    <option value = "blues">blues</option>
+                    <option value = "other">other</option>
+                </select>
+                </div>
+                <br>
+                <div id = "explicit">explicit?
+                    <input type = "radio" name = "r1" value = "yes" style = "margin-left:6px; margin-right:3px">Yes
+                    <input type = "radio" name = "r1" value = "no" style = "margin-left6px; margin-right:3px">No
+                </div>
+                <br>
+                <div id = "words">words present?
+                    <input type = "radio" name = "r2" value = "yes" style = "margin-left:6px; margin-right:3px">Yes
+                    <input type = "radio" name = "r2" value = "no" style = "margin-left:6px; margin-right:3px">No
+                </div>
+                <br>
+                <div id = "melody">melody? (1=hate, 5=loved)<br>
+                    <input type = "radio" name = "r3" value = "1" style = "margin-right:3px">1
+                    <input type = "radio" name = "r3" value = "2" style = "margin-left:10px; margin-right:3px">2
+                    <input type = "radio" name = "r3" value = "3" style = "margin-left:10px; margin-right:3px">3
+                    <input type = "radio" name = "r3" value = "4" style = "margin-left:10px; margin-right:3px">4
+                    <input type = "radio" name = "r3" value = "5" style = "margin-left:10px; margin-right:3px">5
+                </div>
+                <br>
+                <div id = "lyrics">lyrics? (1=hate, 5=loved)<br>
+                    <input type = "radio" name = "r4" value = "1" style = "margin-right:3px">1
+                    <input type = "radio" name = "r4" value = "2" style = "margin-left:10px; margin-right:3px">2
+                    <input type = "radio" name = "r4" value = "3" style = "margin-left:10px; margin-right:3px">3
+                    <input type = "radio" name = "r4" value = "4" style = "margin-left:10px; margin-right:3px">4
+                    <input type = "radio" name = "r4" value = "5" style = "margin-left:10px; margin-right:3px">5
+                </div>
+                <br>
+                <div id = "emotion">emotion? (1=stone faced, 5=sobbing)<br>
+                    <input type = "radio" name = "r5" value = "1" style = "margin-right:3px">1
+                    <input type = "radio" name = "r5" value = "2" style = "margin-left:10px; margin-right:3px">2
+                    <input type = "radio" name = "r5" value = "3" style = "margin-left:10px; margin-right:3px">3
+                    <input type = "radio" name = "r5" value = "4" style = "margin-left:10px; margin-right:3px">4
+                    <input type = "radio" name = "r5" value = "5" style = "margin-left:10px; margin-right:3px">5
+                </div>
+                <br>
+                <div id = "speed">speed? (1=turtle, 5=light)<br>
+                    <input type = "radio" name = "r6" value = "1" style = "margin-right:3px">1
+                    <input type = "radio" name = "r6" value = "2" style = "margin-left:10px; margin-right:3px">2
+                    <input type = "radio" name = "r6" value = "3" style = "margin-left:10px; margin-right:3px">3
+                    <input type = "radio" name = "r6" value = "4" style = "margin-left:10px; margin-right:3px">4
+                    <input type = "radio" name = "r6" value = "5" style = "margin-left:10px; margin-right:3px">5
+                </div>
+                <br>
+                <div id = "overall">overall? (1=hate, 5=loved)<br>
+                    <input type = "radio" name = "r7" value = "1" style = "margin-right:3px">1
+                    <input type = "radio" name = "r7" value = "2" style = "margin-left:10px; margin-right:3px">2
+                    <input type = "radio" name = "r7" value = "3" style = "margin-left:10px; margin-right:3px">3
+                    <input type = "radio" name = "r7" value = "4" style = "margin-left:10px; margin-right:3px">4
+                    <input type = "radio" name = "r7" value = "5" style = "margin-left:10px; margin-right:3px">5
+                </div>
+                <br>
+                <div id = "finalsubmit"><p>ready to submit?</p>
+                    <button id = "upload" type = "button" onclick = "getData()">SUBMIT!</button>
+                </div>
+            </div>
+            <div id = "ratingsTable" style = "display:none">
+                <br>
+                <br>
+                <h4>past ratings of the same song:</h4>
+                <table id = "table">
+                    <tr>
+                        <th>username</th>
+                        <th>song</th>
+                        <th>artist</th>
+                        <th>genre</th>
+                        <th>explicit</th>
+                        <th>words present</th>
+                        <th>melody</th>
+                        <th>lyrics</th>
+                        <th>emotion</th>
+                        <th>speed</th>
+                        <th>overall</th>
+                        <th>spelp score!</th>
+                    </tr>
+                    <tr>
+                        <td>harryPotter773</td>
+                        <td>party in the usa</td>
+                        <td>miley cyrus</td>
+                        <td>pop</td>
+                        <td>No</td>
+                        <td>Yes</td>
+                        <td>2</td>
+                        <td>5</td>
+                        <td>4</td>
+                        <td>2</td>
+                        <td>4</td>
+                        <td>2.16</td>
+                    </tr>
+                </table>
+            </div>
+
+        <p id = "output"></p>
+
+
+    </div>
+    <script>
+        const submit = document.getElementById("submitsong");
+        submit.onclick = function() {
+            document.getElementById("rating").style = "display:block";
+            document.getElementById("ratingsTable").style = "display:block";
+        }
+        function getData() {
+            var song = document.getElementById("song").value;
+            var artist = document.getElementById("artist").value;
+            var genre = document.getElementById("genre").value;
+            var explicit = document.getElementsByName("r1");
+            var explicit_value;
+            for (var i = 0; i < explicit.length; i++){
+                if (explicit[i].checked) {
+                    explicit_value = explicit[i].value;
+                    explicit[i].checked = false;
+                }
+            }
+            var words = document.getElementsByName("r2");
+            var words_value;
+            for (var i = 0; i < words.length; i++){
+                if (words[i].checked) {
+                    words_value = words[i].value;
+                    words[i].checked = false;
+                }
+            }
+            var melody = document.getElementsByName("r3");
+            var melody_value;
+            for (var i = 0; i < melody.length; i++){
+                if (melody[i].checked) {
+                    melody_value = melody[i].value;
+                    melody[i].checked = false;
+                }
+            }
+            var lyrics = document.getElementsByName("r4");
+            var lyrics_value;
+            for (var i = 0; i < lyrics.length; i++){
+                if(lyrics[i].checked) {
+                    lyrics_value = lyrics[i].value;
+                    lyrics[i].checked = false;
+                }
+            }
+            var emotion = document.getElementsByName("r5");
+            var emotion_value;
+            for (var i = 0; i < emotion.length; i++){
+                if(emotion[i].checked) {
+                    emotion_value = emotion[i].value;
+                    emotion[i].checked = false;
+                }
+            }
+            var speed = document.getElementsByName("r6");
+            var speed_value;
+            for (var i = 0; i < speed.length; i++){
+                if(speed[i].checked) {
+                    speed_value = speed[i].value;
+                    speed[i].checked = false;
+                }
+            }
+            var overall = document.getElementsByName("r7");
+            var overall_value;
+            for (var i = 0; i < overall.length; i++){
+                if(overall[i].checked) {
+                    overall_value = overall[i].value;
+                    overall[i].checked = false;
+                }
+            }
+            document.getElementById("song").value = "";
+            document.getElementById("artist").value = "";
+            document.getElementById("genre").value = "";
+
+            var table = document.getElementById("table");
+            var row = table.insertRow();
+            var userCell = row.insertCell(0);
+            var songCell = row.insertCell(1);
+            var artistCell = row.insertCell(2);
+            var genreCell = row.insertCell(3);
+            var explicitCell = row.insertCell(4);
+            var wordsCell = row.insertCell(5);
+            var melodyCell = row.insertCell(6);
+            var lyricsCell = row.insertCell(7);
+            var emotionCell = row.insertCell(8);
+            var speedCell = row.insertCell(9);
+            var overallCell = row.insertCell(10);
+            var spelpCell = row.insertCell(11);
+            userCell.innerHTML = "waye";
+            songCell.innerHTML = song;
+            artistCell.innerHTML = artist;
+            genreCell.innerHTML = genre;
+            explicitCell.innerHTML = explicit_value;
+            wordsCell.innerHTML = words_value;
+            melodyCell.innerHTML = melody_value;
+            lyricsCell.innerHTML = lyrics_value;
+            emotionCell.innerHTML = emotion_value;
+            speedCell.innerHTML = speed_value;
+            overallCell.innerHTML = overall_value;
+            spelpCell.innerHTML = 0.4*(+overall_value) + 0.2*(+melody_value + +lyrics_value) + 0.1*(+emotion_value + +speed_value);
+
+
+        }
+
+
+    </script>
+    <br><br><br><br>
+    <div class = "buttons" style = "text-align: center">
+        <button style = "margin-right: 100px; width: 100px" onclick = "window.location.href='home'" id = "home">home</button>
+        <button style = "margin-right: 100px; width: 100px" onclick = "window.location.href='login'" id = "login">login</button>
+        <button style = "width: 100px;" onclick = "window.location.href='about'" id = "about">about</button>
+        <br><br><br><br>
+    </div>
+    <p id = "randomThing"></p>
+
+    {% endblock %}
+
+</body>
+</html>
